@@ -99,8 +99,7 @@
                 var x1pos = x1 - pos;
                 if (y1 >= 200) {
                     if (!gameover) {
-                        dopost(null, "/highscore",
-                            function (e) { console.log(e); });
+                        dopost({ score: score, name: showNameDialog() }, "/highscore", function (e) { console.log(e); });
                     }
                     gameover = true;
                 }
