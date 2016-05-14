@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+    <meta http-equiv="Content-Type" content="text/html;">
     <meta name="viewport" content="width=840" />
     <meta name="description" content="this is simple ping pong game">
     <meta name="keywords" content="ping pong,iphone,android,browser game,javascript,html">
@@ -9,6 +9,7 @@
     <title>circle ball</title>
 </head>
 <body>
+    <script src="teteteAjax.js"></script>
     <script>
         var canvas = document.createElement("canvas");
         var ctx = canvas.getContext("2d");
@@ -76,7 +77,7 @@
                 size / 80
             );
             ctx.fill();
-            ctx.font = size * 20 / 400 + "px '@ÔøΩlÔøΩr ÔøΩSÔøΩVÔøΩbÔøΩN'";
+            ctx.font = size * 20 / 400 + "px '@ÅEΩlÅEΩr ÅEΩSÅEΩVÅEΩbÅEΩN'";
             ctx.textAlign = "center";
             if (start) {
                 ctx.fillText(score, size / 2, size * 18 / 40);
@@ -86,7 +87,7 @@
             }
             if (gameover) {
                 ctx.fillText("gameover", size / 2, size / 2);
-                ctx.font = size * 13 / 400 + "px '@ÔøΩlÔøΩr ÔøΩSÔøΩVÔøΩbÔøΩN'";
+                ctx.font = size * 13 / 400 + "px '@ÅEΩlÅEΩr ÅEΩSÅEΩVÅEΩbÅEΩN'";
                 ctx.fillText("tap here", size / 2, size * 215 / 400);
                 ctx.fillText("to restart", size / 2, size * 230 / 400);
             }
@@ -142,12 +143,7 @@
         }
         function onclick() {
             if (gameover) {
-                gameover = false;
-                score = 0;
-                x = 0;
-                y = 120;
-                ax = 0.5;
-                ay = -1;
+                restart();
             }
             if (!start) {
                 start = true;
@@ -160,12 +156,7 @@
             if (pos < 0) pos += 500;
             if (gameover &&
                 Math.sqrt(Math.pow(e.clientX - size / 2, 2) + Math.pow(e.clientY - size / 2, 2)) < size / 8) {
-                gameover = false;
-                score = 0;
-                x = 0;
-                y = 60;
-                ax = 0.5;
-                ay = 1;
+                restart();
             }
             if (!start) {
                 start = true;
@@ -174,6 +165,23 @@
         }
         function touchHandler(event) {
             event.preventDefault();
+        }
+        function restart() {
+            dopost({ score: score, name: showNameDialog() }, "/highscore", function (e) { console.log(e); });
+
+            gameover = false;
+            score = 0;
+            x = 0;
+            y = 60;
+            ax = 0.5;
+            ay = 1;
+        }
+        function showNameDialog() {
+            var str = prompt("your score:" + score + " write your name and submit score", "name");
+            if (str == null) {
+                str = "player";
+            }
+            return str;
         }
     </script>
 </body>
