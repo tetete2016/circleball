@@ -97,7 +97,13 @@
                 var x1 = x + ax;
                 var y1 = y + ay;
                 var x1pos = x1 - pos;
-                if (y1 >= 200) gameover = true;
+                if (y1 >= 200) {
+                    if (!gameover) {
+                        dopost({ score: score, name: showNameDialog() }, "/highscore",
+                            function (e) { console.log(e); });
+                    }
+                    gameover = true;
+                }
                 if (x1pos > 250) x1pos -= 500;
                 if (x1pos < -250) x1pos += 500;
                 if (x1 > 250) x1 -= 500;
@@ -167,8 +173,6 @@
             event.preventDefault();
         }
         function restart() {
-            dopost({ score: score, name: showNameDialog() }, "/highscore", function (e) { console.log(e); });
-
             gameover = false;
             score = 0;
             x = 0;
