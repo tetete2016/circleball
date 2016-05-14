@@ -13,7 +13,7 @@ app.get('/', function(request, response) {
 });
 
 app.post('/highscore', function (request, response) {
-    console.log(request.body);
+    console.log(JSON.parse(request.body));
     response.send("score sent!!");
 });
 
