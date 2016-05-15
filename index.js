@@ -36,16 +36,6 @@ app.get('/highscore', function (request, response) {
     var str = JSON.stringify(scores);
     response.send(str);
 });
-app.get('/remove', function (request, response) {
-    pg.connect(process.env.DATABASE_URL, function (err, client, done) {
-        client.query("REMOVE FROM highscore", function (err, result) {
-            done();
-            if (err)
-            { console.error(err); return null; }
-        });
-    });
-    response.send("data removed");
-});
 app.listen(app.get('port'), function () {
     console.log('Node app is running on port', app.get('port'));
     getdata();
