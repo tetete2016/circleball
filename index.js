@@ -75,6 +75,7 @@ app.get('/db', function (request, response) {
 });
 
 function getdata() {
+    console.log("getdata()");
     pg.connect(process.env.DATABASE_URL, function (err, client, done) {
         client.query('SELECT * FROM highscore', function (err, result) {
             done();
@@ -82,7 +83,8 @@ function getdata() {
             { console.error(err); return null; }
             else
             {
-                return result.rows
+                console.log(result.rows);
+                return result.rows;
             }
         });
     });
