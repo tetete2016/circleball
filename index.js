@@ -2,11 +2,16 @@ var express = require('express');
 var app = express();
 var bodyParser = require('body-parser');
 
+var scores = [];
+
 app.set('port', (process.env.PORT || 5000));
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-//app.use(bodyParser.json());
+
+function ScoreData(name,score) {
+    
+}
 
 app.use(express.static('public'));
 
@@ -16,12 +21,16 @@ app.get('/', function(request, response) {
 
 app.post('/highscore', function (request, response) {
     console.log(request.body);
-    //console.log(JSON.parse(request.body));
-    response.send("score sent!!");
+    if (request.body.name != null && request.body.score != null) {
+        scores.push(new ScoreData(request.body.name, request.body.score));
+    }
+    console.log(scores);
+    response.send("");
 });
 
 app.get('/highscore', function (request, response) {
     console.log(request.body);
+    
     response.send("score");
 });
 
