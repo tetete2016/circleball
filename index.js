@@ -33,25 +33,7 @@ app.post('/highscore', function (request, response) {
 
 app.get('/highscore', function (request, response) {
     console.log(request.body);
-    var str = "{";
-    str += '"name":[';
-    for (var i = 0; i < scores.length; i++) {
-        str += '"' + scores[i].name + '"';
-        if (i < scores.length - 1) {
-            str += ",";
-        }
-    }
-    str += "],";
-
-    str += '"score":[';
-    for (var i = 0; i < scores.length; i++) {
-        str += scores[i].score;
-        if (i < scores.length - 1) {
-            str += ",";
-        }
-    }
-    str += "]";
-    str += "}";
+    var str = JSON.stringify(scores);
     response.send(str);
 });
 

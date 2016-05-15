@@ -228,14 +228,30 @@
         function showHighScore() {
             doget(null, "/highscore", function (e) {
                 var data = JSON.parse(e);
-                var str = "<tr> <th>name</th> <th>score</th> </tr>";
+                var str = "<tr><th>ranking<th> <th>name</th> <th>score</th> </tr>";
+                console.log(data);
+                data.sort(function (a, b) {
+                    return a.score - b.score;
+                });
                 console.log(data);
                 for (var i = 0; i < data.length; i++) {
-                    str += "<tr><th>" + data.name[i] + "</th><th>" + data.score[i] + "</th> </tr>";
+                    str += "<tr><th>" + toOrderText(i + 1) + "</th>" + "<th>" + data[i].name + "</th><th>" + data[i].score + "</th> </tr>";
                 }
                 console.log(str);
                 document.getElementById("table").innerHTML = str;
             });
+        }
+        function toOrderText(num) {
+            switch (num) {
+                case 1:
+                    return "1st";
+                case 2:
+                    return "2nd";
+                case 3:
+                    return "3rd";
+                default:
+                    return num + "th";
+            }
         }
     </script>
 </body>
