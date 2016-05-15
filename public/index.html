@@ -118,7 +118,7 @@
                     k = (50 - y) / ay;
                     x = x + ax * k;
                     y = 50;
-                    ay = -ay;
+                    ay = -ay / (Math.abs(ax) + 1) * 1.5;
                     x = x + ax * (1 - k);
                     y = y + ay * (1 - k);
                     score++;
@@ -128,7 +128,7 @@
                     x = x + ax * k;
                     //y = y + ay * k;
                     y = 150;
-                    ay = -ay;
+                    ay = -ay / (Math.abs(ax) + 1) * 1.5;
                     ax = x1pos / 8;
                     if (Math.floor(ax * 10) == 0) ax = Math.random() - 0.5;
                     x = x + ax * (1 - k);
