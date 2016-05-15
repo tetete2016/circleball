@@ -227,11 +227,11 @@
         }
         function showHighScore() {
             doget(null, "/highscore", function (e) {
-                var data = JSON.stringify(e.replace(/\\/g, ''));
+                var data = JSON.stringify(e);
                 var str = "<tr> <th>name</th> <th>score</th> </tr>";
                 console.log(data);
                 for (var i = 0; i < data.length; i++) {
-                    str += "<tr><th>" + data[i].name + "</th><th>" + data.score + "</th> </tr>";
+                    str += "<tr><th>" + data.name[i] + "</th><th>" + data.score[i] + "</th> </tr>";
                 }
                 console.log(str);
                 document.getElementById("table").innerHTML = str;
