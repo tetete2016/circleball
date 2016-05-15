@@ -10,7 +10,8 @@
   },
   "dependencies": {
     "express": ">4.0.0",
-    "body-parser": ">0.0.0"
+    "body-parser": ">0.0.0",
+    "pg": "4.x"
   },
   "repository": {
     "type": "git",
