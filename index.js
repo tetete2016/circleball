@@ -44,7 +44,7 @@ app.get('/highscore', function (request, response) {
     }
     str += "]";
     str += "}";
-    response.send("score");
+    response.send(str);
 });
 
 app.listen(app.get('port'), function () {
