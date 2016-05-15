@@ -9,6 +9,32 @@
     <title>circle ball</title>
 </head>
 <body>
+    <style>
+        body {
+            background-color: dimgray;
+        }
+
+        .score {
+            overflow: scroll;
+        }
+
+        th {
+            background-color: black;
+            color: white;
+            font-size: 30px;
+            margin: 5px;
+            padding-left: 30px;
+            padding-right: 30px;
+        }
+    </style>
+    <div id="canvasDiv">
+
+    </div>
+    <div id="scoreDiv">
+        <table>
+            <tr> <th>name</th> <th>score</th> </tr>
+        </table>
+    </div>
     <script src="TeteteAjax.js"></script>
     <script>
         var canvas = document.createElement("canvas");
@@ -25,10 +51,20 @@
 
         var name = "name";
 
+        var scoreDiv = document.getElementById("scoreDiv");
+        scoreDiv.style.position = "absolute";
         if (window.innerHeight > window.innerWidth) {
             size = window.innerWidth;
+            scoreDiv.style.top = size + "px";
+            scoreDiv.style.left = "0px";
+            scoreDiv.style.height = window.innerHeight - size;
+            scoreDiv.style.width = size;
         } else {
             size = window.innerHeight;
+            scoreDiv.style.top = "0px";
+            scoreDiv.style.left = size + "px";
+            scoreDiv.style.width = window.innerWidth - size;
+            scoreDiv.style.height = size;
         }
 
         canvas.width = size;
@@ -42,7 +78,7 @@
         document.addEventListener("touchmove", touchHandler, false);
         document.addEventListener("touchend", touchHandler, false);
         document.addEventListener("touchcancel", touchHandler, false);
-        document.body.appendChild(canvas);
+        document.getElementById("canvasDiv").appendChild(canvas);
         function timer_function() {
             draw();
             move();
@@ -158,6 +194,7 @@
         }
         function ontouch() {
             e = event.touches[0];
+            if (e.clientX > size && e.clientY > size) return false;
             pos = Math.floor(Math.atan2(e.clientY - size / 2, e.clientX - size / 2) / Math.PI * 250);
             if (pos > 500) pos -= 500;
             if (pos < 0) pos += 500;
@@ -169,6 +206,7 @@
                 start = true;
             }
             console.log(pos);
+            return false;
         }
         function touchHandler(event) {
             event.preventDefault();
