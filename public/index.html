@@ -14,10 +14,6 @@
             background-color: dimgray;
         }
 
-        .score {
-            overflow: scroll;
-        }
-
         th {
             background-color: black;
             color: white;
@@ -31,9 +27,7 @@
 
     </div>
     <div id="scoreDiv">
-        <table>
-            <tr> <th>name</th> <th>score</th> </tr>
-        </table>
+        <table id="table"></table>
     </div>
     <script src="TeteteAjax.js"></script>
     <script>
@@ -53,18 +47,23 @@
 
         var scoreDiv = document.getElementById("scoreDiv");
         scoreDiv.style.position = "absolute";
+        scoreDiv.style.overflowY = "scroll";
+        scoreDiv.style.textAlign = "center";
         if (window.innerHeight > window.innerWidth) {
+            //mobile
             size = window.innerWidth;
             scoreDiv.style.top = size + "px";
             scoreDiv.style.left = "0px";
-            scoreDiv.style.height = window.innerHeight - size;
-            scoreDiv.style.width = size;
+            scoreDiv.style.height = window.innerHeight - size + "px";
+            scoreDiv.style.width = size + "px";
         } else {
+            //pc
             size = window.innerHeight;
             scoreDiv.style.top = "0px";
             scoreDiv.style.left = size + "px";
-            scoreDiv.style.width = window.innerWidth - size;
-            scoreDiv.style.height = size;
+            //scoreDiv.style.width = window.innerWidth - size + "px";
+            scoreDiv.style.height = size + "px";
+            scoreDiv.class = "score1";
         }
 
         canvas.width = size;
@@ -226,6 +225,18 @@
             }
             name = str;
             return str;
+        }
+        function showHighScore() {
+            doget(null, "/highscore", function (e) {
+                var data = JSON.stringify(e);
+                var str = "<tr> <th>name</th> <th>score</th> </tr>";
+                console.log(data);
+                for (var i = 0; i < data.length; i++) {
+                    str += "<tr><th>" + data[i].name + "</th><th>" + data.score + "</th> </tr>";
+                }
+                console.log(str);
+                document.getElementById("table").innerHTML = str;
+            });
         }
     </script>
 </body>
