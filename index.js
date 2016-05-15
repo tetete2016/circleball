@@ -40,7 +40,7 @@ app.get('/highscore', function (request, response) {
 
     str += '"score":[';
     for (var i = 0; i < scores.length; i++) {
-        str += scores[i].score;
+        str += '"' + scores[i].score + '"';
         if (i < scores.length - 1) {
             str += ",";
         }
