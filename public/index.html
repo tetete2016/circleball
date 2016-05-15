@@ -23,6 +23,8 @@
 
         var size = 800;
 
+        var name = "name";
+
         if (window.innerHeight > window.innerWidth) {
             size = window.innerWidth;
         } else {
@@ -180,9 +182,9 @@
             ay = 1;
         }
         function showNameDialog() {
-            var str = prompt("your score:" + score + " write your name and submit score", "name");
-            if (str == null) {
-                str = "player";
+            name = prompt("your score:" + score + " write your name and submit score", name);
+            if (name == null) {
+                name = "player";
             }
             return str;
         }
