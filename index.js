@@ -41,7 +41,7 @@ app.get('/highscore', function (request, response) {
             str += ",";
         }
     }
-    str += "] ,";
+    str += "],";
 
     str += '"score":[';
     for (var i = 0; i < scores.length; i++) {
