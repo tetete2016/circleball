@@ -182,11 +182,12 @@
             ay = 1;
         }
         function showNameDialog() {
-            name = prompt("your score:" + score + " write your name and submit score", name);
-            if (name == null) {
-                name = "player";
+            var str = prompt("your score:" + score + " write your name and submit score", name);
+            if (str == null) {
+                str = "player";
             }
-            return name;
+            name = str;
+            return str;
         }
     </script>
 </body>
