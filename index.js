@@ -57,7 +57,7 @@ app.get('/highscore', function (request, response) {
 
 app.listen(app.get('port'), function () {
     console.log('Node app is running on port', app.get('port'));
-    scores = adddata();
+    scores = getdata();
 });
 
 app.get('/db', function (request, response) {
