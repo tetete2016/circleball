@@ -9,13 +9,14 @@ app.set('port', (process.env.PORT || 5000));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-function ScoreData(name,score) {
-    
+function ScoreData(name, score) {
+    this.name = name;
+    this.score = score;
 }
 
 app.use(express.static('public'));
 
-app.get('/', function(request, response) {
+app.get('/', function (request, response) {
     response.send("error");
 });
 
@@ -30,10 +31,22 @@ app.post('/highscore', function (request, response) {
 
 app.get('/highscore', function (request, response) {
     console.log(request.body);
-    
+    var str = "{";
+    str += '"name":[';
+    for (var i = 0; i < scores.length; i++) {
+        str += scores[i].name;
+    }
+    str += "] ,";
+
+    str += '"score":[';
+    for (var i = 0; i < scores.length; i++) {
+        str += scores[i].score;
+    }
+    str += "]";
+    str += "}";
     response.send("score");
 });
 
-app.listen(app.get('port'), function() {
-  console.log('Node app is running on port', app.get('port'));
+app.listen(app.get('port'), function () {
+    console.log('Node app is running on port', app.get('port'));
 });
