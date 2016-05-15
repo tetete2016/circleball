@@ -78,6 +78,7 @@
         document.addEventListener("touchend", touchHandler, false);
         document.addEventListener("touchcancel", touchHandler, false);
         document.getElementById("canvasDiv").appendChild(canvas);
+        showHighScore();
         function timer_function() {
             draw();
             move();
@@ -216,6 +217,7 @@
             y = 60;
             ax = 0.5;
             ay = 1;
+            showHighScore();
         }
         function showNameDialog() {
             var str = prompt("your score is " + score + "." + "\n write your name and submit score", name);
@@ -228,7 +230,7 @@
         function showHighScore() {
             doget(null, "/highscore", function (e) {
                 var data = JSON.parse(e);
-                var str = "<tr><th>ranking<th> <th>name</th> <th>score</th> </tr>";
+                var str = "<tr><th>ranking</th> <th>name</th> <th>score</th> </tr>";
                 console.log(data);
                 data.sort(function (a, b) {
                     return b.score - a.score;
