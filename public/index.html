@@ -231,7 +231,7 @@
                 var str = "<tr><th>ranking<th> <th>name</th> <th>score</th> </tr>";
                 console.log(data);
                 data.sort(function (a, b) {
-                    return a.score - b.score;
+                    return b.score - a.score;
                 });
                 console.log(data);
                 for (var i = 0; i < data.length; i++) {
