@@ -24,6 +24,7 @@ app.get('/', function (request, response) {
 app.post('/highscore', function (request, response) {
     console.log(request.body);
     if (request.body.name != null && request.body.score != null) {
+        adddata(request.body.name, request.body.score);
         scores.push(new ScoreData(request.body.name, request.body.score));
     }
     console.log(scores);
@@ -56,6 +57,7 @@ app.get('/highscore', function (request, response) {
 
 app.listen(app.get('port'), function () {
     console.log('Node app is running on port', app.get('port'));
+    scores = adddata();
 });
 
 app.get('/db', function (request, response) {
@@ -70,4 +72,28 @@ app.get('/db', function (request, response) {
             }
         });
     });
-})
+});
+
+function getdata() {
+    pg.connect(process.env.DATABASE_URL, function (err, client, done) {
+        client.query('SELECT * FROM highscore', function (err, result) {
+            done();
+            if (err)
+            { console.error(err); return null; }
+            else
+            {
+                return result.rows
+            }
+        });
+    });
+}
+
+function adddata(name, score) {
+    pg.connect(process.env.DATABASE_URL, function (err, client, done) {
+        client.query("insert into highscore values (1, '" + name + "'," + score + ");", function (err, result) {
+            done();
+            if (err)
+            { console.error(err); return null; }
+        });
+    });
+}
