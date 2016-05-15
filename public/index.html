@@ -181,7 +181,6 @@
             pos = Math.floor(Math.atan2(e.clientY - size / 2, e.clientX - size / 2) / Math.PI * 250);
             if (pos > 500) pos -= 500;
             if (pos < 0) pos += 500;
-            console.log(pos);
         }
         function onclick() {
             if (gameover) {
@@ -228,7 +227,7 @@
         }
         function showHighScore() {
             doget(null, "/highscore", function (e) {
-                var data = JSON.stringify(e);
+                var data = JSON.stringify(e.replace(/\\/g, ''));
                 var str = "<tr> <th>name</th> <th>score</th> </tr>";
                 console.log(data);
                 for (var i = 0; i < data.length; i++) {
