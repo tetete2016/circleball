@@ -137,7 +137,10 @@
                 var x1pos = x1 - pos;
                 if (y1 >= 200) {
                     if (!gameover) {
-                        dopost(JSON.stringify({ score: score, name: showNameDialog() }), "/highscore", function (e) { console.log(e); });
+                        dopost(JSON.stringify({ score: score, name: showNameDialog() }), "/highscore", function (e) {
+                            console.log(e);
+                            showHighScore();
+                        });
                     }
                     gameover = true;
                 }
@@ -154,10 +157,9 @@
                     k = (50 - y) / ay;
                     x = x + ax * k;
                     y = 50;
-                    if (Math.abs(ay) > 1) {
-                        ay = -ay / (Math.abs(ax) + 1) * 1.5;
-                    } else {
-                        ay = -ay;
+                    ay = -ay;
+                    if (ay < 5) {
+                        ay += 0.5;
                     }
                     x = x + ax * (1 - k);
                     y = y + ay * (1 - k);
@@ -168,11 +170,8 @@
                     x = x + ax * k;
                     //y = y + ay * k;
                     y = 150;
-                    if (Math.abs(ay) > 1) {
-                        ay = -ay / (Math.abs(ax) + 1) * 1.5;
-                    } else {
-                        ay = -ay;
-                    }
+                    ay = -ay;
+                    ay += Math.abs(x1pos / 30);
                     ax = x1pos / 8;
                     if (Math.floor(ax * 10) == 0) ax = Math.random() - 0.5;
                     x = x + ax * (1 - k);
