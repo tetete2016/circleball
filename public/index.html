@@ -171,7 +171,7 @@
                     //y = y + ay * k;
                     y = 150;
                     ay = -ay;
-                    ay += Math.abs(x1pos / 30);
+                    ay -= Math.abs(x1pos / 30);
                     ax = x1pos / 8;
                     if (Math.floor(ax * 10) == 0) ax = Math.random() - 0.5;
                     x = x + ax * (1 - k);
