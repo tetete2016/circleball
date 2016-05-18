@@ -200,7 +200,7 @@
         }
         function ontouch() {
             e = event.touches[0];
-            if (e.clientX > size && e.clientY > size) return false;
+            //if (e.clientX > size && e.clientY > size) return false;
             pos = Math.floor(Math.atan2(e.clientY - size / 2, e.clientX - size / 2) / Math.PI * 250);
             if (pos > 500) pos -= 500;
             if (pos < 0) pos += 500;
@@ -208,13 +208,15 @@
                 Math.sqrt(Math.pow(e.clientX - size / 2, 2) + Math.pow(e.clientY - size / 2, 2)) < size / 8) {
                 restart();
             }
-            if (!start) {
+            if (!start &&
+                Math.sqrt(Math.pow(e.clientX - size / 2, 2) + Math.pow(e.clientY - size / 2, 2)) < size / 8) {
                 start = true;
             }
             console.log(pos);
         }
         function touchHandler(event) {
-            event.preventDefault();
+            if (event.touches[0].clientY < size)
+                event.preventDefault();
         }
         function restart() {
             gameover = false;
