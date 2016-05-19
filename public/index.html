@@ -47,39 +47,41 @@
         var name = "name";
 
         var scoreDiv = document.getElementById("scoreDiv");
-        scoreDiv.style.position = "absolute";
-        scoreDiv.style.overflowY = "scroll";
-        scoreDiv.style.textAlign = "center";
-        if (window.innerHeight > window.innerWidth) {
-            //mobile
-            size = window.innerWidth;
-            scoreDiv.style.top = size + "px";
-            scoreDiv.style.left = "0px";
-            scoreDiv.style.height = window.innerHeight - size + "px";
-            scoreDiv.style.width = size + "px";
-        } else {
-            //pc
-            size = window.innerHeight;
-            scoreDiv.style.top = "0px";
-            scoreDiv.style.left = size + "px";
-            //scoreDiv.style.width = window.innerWidth - size + "px";
-            scoreDiv.style.height = size + "px";
-            scoreDiv.class = "score1";
+        window.onload = function () {
+            scoreDiv.style.position = "absolute";
+            scoreDiv.style.overflowY = "scroll";
+            scoreDiv.style.textAlign = "center";
+            if (window.innerHeight > window.innerWidth) {
+                //mobile
+                size = window.innerWidth;
+                scoreDiv.style.top = size + "px";
+                scoreDiv.style.left = "0px";
+                scoreDiv.style.height = window.innerHeight - size + "px";
+                scoreDiv.style.width = size + "px";
+            } else {
+                //pc
+                size = window.innerHeight;
+                scoreDiv.style.top = "0px";
+                scoreDiv.style.left = size + "px";
+                //scoreDiv.style.width = window.innerWidth - size + "px";
+                scoreDiv.style.height = size + "px";
+                scoreDiv.class = "score1";
+            }
+            size1 = size * 0.75;
+            canvas.width = size;
+            canvas.height = size;
+            document.body.style.margin = "0px";
+            canvas.ontouchstart = ontouch;
+            canvas.ontouchmove = ontouch;
+            document.onmousemove = onmouse;
+            document.onmousedown = onclick;
+            document.addEventListener("touchstart", touchHandler, false);
+            document.addEventListener("touchmove", touchHandler, false);
+            document.addEventListener("touchend", touchHandler, false);
+            document.addEventListener("touchcancel", touchHandler, false);
+            document.getElementById("canvasDiv").appendChild(canvas);
+            showHighScore();
         }
-        size1 = size * 0.75;
-        canvas.width = size;
-        canvas.height = size;
-        document.body.style.margin = "0px";
-        canvas.ontouchstart = ontouch;
-        canvas.ontouchmove = ontouch;
-        document.onmousemove = onmouse;
-        document.onmousedown = onclick;
-        document.addEventListener("touchstart", touchHandler, false);
-        document.addEventListener("touchmove", touchHandler, false);
-        document.addEventListener("touchend", touchHandler, false);
-        document.addEventListener("touchcancel", touchHandler, false);
-        document.getElementById("canvasDiv").appendChild(canvas);
-        showHighScore();
         function timer_function() {
             draw();
             move();
