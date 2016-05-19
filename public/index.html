@@ -42,6 +42,7 @@
         var start = false;
 
         var size = 800;
+        var size1 = 800;
 
         var name = "name";
 
@@ -65,7 +66,7 @@
             scoreDiv.style.height = size + "px";
             scoreDiv.class = "score1";
         }
-
+        size1 = size * 0.75;
         canvas.width = size;
         canvas.height = size;
         document.body.style.margin = "0px";
@@ -100,34 +101,34 @@
             ctx.strokeStyle = "rgb(255,255,255)";
             ctx.lineWidth = 5;
             ctx.fillRect(0, 0, size, size);
-            elipce(size / 2, size / 2, size / 2, false);
+            elipce(size / 2, size / 2, size1 / 2, false);
             line(
-                Math.cos((pos - 10) / 250 * Math.PI) * size * 3 / 8 + size / 2,
-                Math.sin((pos - 10) / 250 * Math.PI) * size * 3 / 8 + size / 2,
-                Math.cos((pos + 10) / 250 * Math.PI) * size * 3 / 8 + size / 2,
-                Math.sin((pos + 10) / 250 * Math.PI) * size * 3 / 8 + size / 2
+                Math.cos((pos - 10) / 250 * Math.PI) * size1 * 3 / 8 + size / 2,
+                Math.sin((pos - 10) / 250 * Math.PI) * size1 * 3 / 8 + size / 2,
+                Math.cos((pos + 10) / 250 * Math.PI) * size1 * 3 / 8 + size / 2,
+                Math.sin((pos + 10) / 250 * Math.PI) * size1 * 3 / 8 + size / 2
                 );
-            elipce(size / 2, size / 2, size / 8, false);
+            elipce(size / 2, size / 2, size1 / 8, false);
             ctx.fillStyle = "rgb(255,255,255)";
             elipce(
-                Math.cos(x / 250 * Math.PI) * y * size / 400 + size / 2,
-                Math.sin(x / 250 * Math.PI) * y * size / 400 + size / 2,
+                Math.cos(x / 250 * Math.PI) * y * size1 / 400 + size / 2,
+                Math.sin(x / 250 * Math.PI) * y * size1 / 400 + size / 2,
                 size / 80
             );
             ctx.fill();
-            ctx.font = size * 20 / 400 + "px '@・ｽl・ｽr ・ｽS・ｽV・ｽb・ｽN'";
+            ctx.font = size1 * 20 / 400 + "px '@・ｽl・ｽr ・ｽS・ｽV・ｽb・ｽN'";
             ctx.textAlign = "center";
             if (start) {
                 ctx.fillText(score, size / 2, size * 18 / 40);
             } else {
-                ctx.fillText("tap here", size / 2, size * 200 / 400);
-                ctx.fillText("to start", size / 2, size * 220 / 400);
+                ctx.fillText("tap here", size / 2, size / 2);
+                ctx.fillText("to start", size / 2, size / 2 + size1 * 20 / 400);
             }
             if (gameover) {
                 ctx.fillText("gameover", size / 2, size / 2);
-                ctx.font = size * 13 / 400 + "px '@・ｽl・ｽr ・ｽS・ｽV・ｽb・ｽN'";
-                ctx.fillText("tap here", size / 2, size * 215 / 400);
-                ctx.fillText("to restart", size / 2, size * 230 / 400);
+                ctx.font = size1 * 13 / 400 + "px '@・ｽl・ｽr ・ｽS・ｽV・ｽb・ｽN'";
+                ctx.fillText("tap here", size / 2, size / 2 + size1 * 15 / 400);
+                ctx.fillText("to restart", size / 2, size / 2 + size1 * 30 / 400);
             }
         }
         function move() {
@@ -214,7 +215,7 @@
             console.log(pos);
         }
         function touchHandler(event) {
-            if (event.touches[0].clientY < size)
+            if (event.touches[0].clientY < size && event.touches[0].clientX < size)
                 event.preventDefault();
         }
         function restart() {
