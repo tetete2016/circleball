@@ -2,7 +2,15 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html;">
-    <meta name="viewport" content="width=device-width" />
+    <meta name="viewport" content="width=device-width" id="view" />
+    <script>
+        window.onload = function () {
+            if (window.innerWidth < window.innerHeight) {
+                var mvp = document.getElementById('veiw');
+                mvp.setAttribute('content', 'width=800');
+            }
+        }
+    </script>
     <meta name="description" content="this is simple ping pong game">
     <meta name="keywords" content="ping pong,iphone,android,browser game,javascript,html">
 
@@ -53,7 +61,7 @@
             scoreDiv.style.textAlign = "center";
             if (window.innerHeight > window.innerWidth) {
                 //mobile
-                size = window.innerWidth;
+                size = 800;
                 scoreDiv.style.top = size + "px";
                 scoreDiv.style.left = "0px";
                 scoreDiv.style.height = window.innerHeight - size + "px";
